@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bMap">
+
+	<!-- 게시판 글 작성 -->
+	<insert id="insert">
+		INSERT INTO MP_BOARD(
+							bno
+							,title
+							,content
+							,writer
+							)
+		VALUES(
+				mp_board_seq.nextval
+				,#{title}
+				,#{content}
+				,#{writer}
+				)
+	</insert>
+	
+	<!-- 게시물 리스트 -->
+	<select id="list" resultType="bVO">
+		SELECT
+			bno
+			,title
+			,writer
+			,regdate
+		FROM
+			mp_board
+		ORDER BY
+			bno desc
+	</select>
+	
+	<!-- 게시물 상세보기 -->
+	<select id="read" parameterType="int" resultType="bVO">
+		SELECT
+			bno
+			,title
+			,content
+			,writer
+			,regdate
+		FROM
+			mp_board
+		WHERE
+			bno = #{bno}
+	</select>
+	
+	<!-- 게시물 수정 -->
+	<update id="update" parameterType="bVO">
+		UPDATE
+			settitle = #{title},
+			content = #{content}
+		WHERE
+			bno = #{bno}
+	</update>
+	
+	<!-- 게시물 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELECT
+		
+		FROM
+			mp_board
+		WHERE
+			bno = #{bno}		
+	</delete>
+</mapper>
