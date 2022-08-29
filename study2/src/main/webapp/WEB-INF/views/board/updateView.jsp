@@ -5,18 +5,13 @@
 <head>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시판 수정</title>
 </head>
 <script type="text/javascript">
 	$(document).ready(function(){
-		// 수정
-		$('#ubtn').click(function(){
-			$('#rfrm').attr('action', '/board/updateView').submit();
-		});
-		
-		// 삭제
-		$('#dbtn').click(function(){
-			$('#rfrm').attr('action', '/board/delete').submit();
+		// 저장
+		$('#sbtn').click(function(){
+			$('#ufrm').attr('action', '/board/update').submit();
 		});
 		
 		// 취소
@@ -30,52 +25,46 @@
 		<header>
 			<h1>게시판</h1>
 		</header>
+		
+		<nav>홈 - 글 작성</nav>
 		<hr/>
 		
-		<nav>홈 - 글작성</nav>
-		<hr/>
-		
-		<section id="container">
-			<form id="rfrm" role="form" method="post">
+		<section id="cotainer">
+			<form id="ufrm" role="form" method="post">
+				<input type="hidden" name="bno" value="${update.bno}" readonly/>
+				
 				<table>
 					<tbody>
 						<tr>
 							<td>
-								<label for="bno">글번호</label>
-								<input type="text" id="bno" name="bno" value="${read.bno}" readonly="readonly"/>
-							</td>
-						</tr>
-						<tr>	
-							<td>
 								<label for="title">제목</label>
-								<input type="text" id="title" name="title" value="${read.title}" readonly/>
+								<input type="text" id="title" name="title" value="${update.title}"/>
 							</td>
 						</tr>
 						<tr>
 							<td>
 								<label for="content">내용</label>
-								<textarea id="content" name="content" readonly>${read.content}</textarea>
+								<textarea id="content" name="content"><c:out value="${update.content}"/></textarea>
 							</td>
-						</tr>	
+						</tr>
 						<tr>
 							<td>
 								<label for="writer">작성자</label>
-								<input type="text" id="writer" name="writer" value="${read.writer}" readonly/>
+								<input type="text" id="writer" name="writer" value="${update.writer}" readonly/>
 							</td>
 						</tr>
-						<tr>	
+						<tr>
 							<td>
 								<label for="regdate">작성날짜</label>
-								<input type="text" name="read.regdate" value="${read.regdate}" readonly/>
+								<input type="text" id="readate" name="readate" value="${update.regdate}" readonly/>
 							</td>
 						</tr>
 					</tbody>
 				</table>
 			</form>
 			<div>
-				<button id="rbtn">수정</button>
-				<button id="dbtn">삭제</button>
-				<button id="lbtn">목록</button>
+				<button id="sbtn">저장</button>
+				<button id="lbtn">취소</button>
 			</div>
 		</section>
 	</div>

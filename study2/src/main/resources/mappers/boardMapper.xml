@@ -47,20 +47,22 @@
 	
 	<!-- 게시물 수정 -->
 	<update id="update" parameterType="bVO">
-		UPDATE
-			settitle = #{title},
-			content = #{content}
+		UPDATE 
+			mp_board
+		SET	
+			title = #{title}
+			,content = #{content}
 		WHERE
 			bno = #{bno}
 	</update>
 	
 	<!-- 게시물 삭제 -->
 	<delete id="delete" parameterType="int">
-		DELECT
+		DELETE
 		
 		FROM
 			mp_board
 		WHERE
-			bno = #{bno}		
+			bno = #{bno}	
 	</delete>
 </mapper>
